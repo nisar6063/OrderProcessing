@@ -1,5 +1,7 @@
 package com.order.processor.service;
 
+import java.util.List;
+
 import javax.ws.rs.Consumes;
 import javax.ws.rs.GET;
 import javax.ws.rs.POST;
@@ -12,6 +14,7 @@ import javax.ws.rs.core.Response;
 import com.order.processor.bean.BuyLeadBean;
 import com.order.processor.bean.BuyLeadItemBean;
 import com.order.processor.bean.CustomerBean;
+import com.order.processor.bean.ProcuralItemBean;
 import com.order.processor.bean.SupplierBean;
 import com.order.processor.bean.UserBean;
 
@@ -74,16 +77,16 @@ public class OPService {
     
     @Path("/updateProcuralItems")
     @PUT
-    public Response updateBuyLeadItem(BuyLeadBean buyLeadBean, @QueryParam("status") String status, 
+    public Response updateBuyLeadItem(List<ProcuralItemBean> procuralItemBeans, @QueryParam("status") String status,
             @QueryParam("supplierId") int supplierId) throws Exception {
         int noOfRow = 0;
         if (status != null) {
-            noOfRow = orm.updateProcuralItemSupplier(buyLeadBean, supplierId);
+            noOfRow = orm.updateProcuralItemSupplier(procuralItemBeans, supplierId);
         }
         if (supplierId != 0) {
             noOfRow = orm.updateProcuralItemStatus(procuralItemBeans, status);
         }
-        if (noOfRow>0) {
+        if (noOfRow > 0) {
             return Response.status(201).build();
         }
         return Response.status(500).build();
