@@ -1,0 +1,5 @@
+package com.order.processor.bean;
+
+public enum BuyLeadStatus {
+    CREATED, RATEUPDATED, QUOTATIONSENT, APPROVED, REJECTED, DISPATCHED, ITEMSPROCURAL, PARTIALLYDISPATCHED;
+}
